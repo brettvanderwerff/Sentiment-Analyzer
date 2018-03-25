@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+ {% block content %}
+  <div class="container">
+      <div class = "col-sm-12">
+        <h1>The Sentiment Analysis Results</h1>
+        <h4>The most positive sentence is:</h4>
+        <p>{{pos_sent}}<br></p>
+        <h4>The most negative sentence is:</h4>
+        <p>{{neg_sent}}<br></p>
+      </div>
+  </div>
+{% endblock %}
