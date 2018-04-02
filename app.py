@@ -1,7 +1,10 @@
 from flask import Flask, render_template, request, redirect, url_for, session, flash
 from flask_session import Session
 from form import MyForm
+from logging import FileHandler, WARNING
 import text_analysis
+
+
 
 #restricts file extensions to the .txt extension
 ALLOWED_EXTENSIONS = set(['txt'])
@@ -10,13 +13,14 @@ ALLOWED_EXTENSIONS = set(['txt'])
 SESSION_TYPE = 'filesystem'
 
 app = Flask(__name__)
+file_handler = FileHandler('errorlog.txt')
+file_handler.setLevel(WARNING)
 app.config.from_object(__name__)
 # create Session instance
 app.config['MAX_CONTENT_LENGTH'] = 5 * 1024 * 1024
 app.config['SECRET_KEY'] = 'secret'
+app.logger.addHandler(file_handler)
 Session(app)
-
-
 
 def allowed_file(filename):
     return '.' in filename and \
@@ -62,4 +66,4 @@ def page_not_found(e):
     return "Your error page for 413 status code", 413
 
 if __name__ == '__main__':
-   app.run(debug=True)
+   app.run()
