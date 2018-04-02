@@ -2,10 +2,8 @@ import nltk
 from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
 
 def text_analysis(corpus):
-    try:
-        sentences = nltk.sent_tokenize(corpus.decode('utf-8'))
-    except UnicodeDecodeError:
-        sentences = nltk.sent_tokenize(corpus.decode('ANSI'))
+
+    sentences = nltk.sent_tokenize(corpus)
     analyzer = SentimentIntensityAnalyzer()
     result = {sentence: analyzer.polarity_scores(sentence) for sentence in sentences}
     sorted_result = sorted(result, key=lambda x: result[x]['compound'])

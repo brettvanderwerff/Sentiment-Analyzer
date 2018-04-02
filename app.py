@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request, redirect, url_for, session, flash
 from flask_session import Session
+from form import MyForm
 import text_analysis
 
 #restricts file extensions to the .txt extension
@@ -12,7 +13,10 @@ app = Flask(__name__)
 app.config.from_object(__name__)
 # create Session instance
 app.config['MAX_CONTENT_LENGTH'] = 5 * 1024 * 1024
+app.config['SECRET_KEY'] = 'secret'
 Session(app)
+
+
 
 def allowed_file(filename):
     return '.' in filename and \
@@ -22,8 +26,16 @@ def allowed_file(filename):
 def index():
    return render_template('home.html')
 
-@app.route('/submission', methods = ['GET', 'POST'])
-def submission():
+@app.route('/submit', methods=('GET', 'POST'))
+def submit():
+    form = MyForm()
+    if form.validate_on_submit():
+        session['file_contents'] = form.name.data
+        return redirect('/analysis')
+    return render_template('submit.html', form=form)
+
+@app.route('/upload', methods = ['GET', 'POST'])
+def upload():
     if request.method == 'POST':
         if 'file' not in request.files:
             flash('No file part')
@@ -33,9 +45,9 @@ def submission():
             flash('No selected file')
             return redirect(request.url)
         if file and allowed_file(file.filename):
-            session['file_contents'] = file.read()
+            session['file_contents'] = file.read().decode('utf-8')
             return redirect(url_for('analysis'))
-    return render_template('submission.html')
+    return render_template('upload.html')
 
 @app.route('/analysis')
 def analysis():
