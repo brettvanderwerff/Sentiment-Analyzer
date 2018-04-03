@@ -1,8 +1,8 @@
 import nltk
 from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
+nltk.download('punkt')
 
 def text_analysis(corpus):
-
     sentences = nltk.sent_tokenize(corpus)
     analyzer = SentimentIntensityAnalyzer()
     result = {sentence: analyzer.polarity_scores(sentence) for sentence in sentences}

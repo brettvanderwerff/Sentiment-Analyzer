@@ -4,8 +4,6 @@ from form import MyForm
 from logging import FileHandler, WARNING
 import text_analysis
 
-
-
 #restricts file extensions to the .txt extension
 ALLOWED_EXTENSIONS = set(['txt'])
 #config for Flask Session, indicates will store session data in a filesystem folder
@@ -66,4 +64,4 @@ def page_not_found(e):
     return "Your error page for 413 status code", 413
 
 if __name__ == '__main__':
-   app.run()
+   app.run('0.0.0.0')
