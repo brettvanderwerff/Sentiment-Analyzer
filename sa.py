@@ -6,18 +6,16 @@ import text_analysis
 
 app = Flask(__name__)
 
-file_handler = FileHandler('errorlog.txt') #file_handler is used to log errors
+file_handler = FileHandler('errorlog.txt')
 file_handler.setLevel(WARNING)
-error_logger = app.logger.addHandler(file_handler)
-
 app.config.from_object(__name__)
-# create Session instance
-app.config['MAX_CONTENT_LENGTH'] = 2 * 1024 * 1024 #sets max upload size to 2 MB
-app.config['SECRET_KEY'] = 'secret'
-app.config['ALLOWED_EXTENSIONS'] = set(['txt']) #restricts file extensions to the .txt extension
 
-Session(app) #Pass the app to the Flask-Session class 'Session'
-SESSION_TYPE = 'filesystem'#config for Flask Session, indicates will store session data in a filesystem folder
+app.config['MAX_CONTENT_LENGTH'] = 5 * 1024 * 1024
+app.config['SECRET_KEY'] = 'secret'
+app.config['ALLOWED_EXTENSIONS'] = set(['txt'])#restricts file extensions to the .txt extension
+app.config['SESSION_TYPE'] = 'filesystem' #config for Flask Session, indicates will store session data in a filesystem folder
+app.logger.addHandler(file_handler)
+Session(app) # create Session instance
 
 def allowed_file(filename):
     return '.' in filename and \
