@@ -51,10 +51,11 @@ def upload():
 @app.route('/analysis')
 def analysis():
     file_contents = session.get('file_contents', None)
-    analyzed_sent = text_analysis.main(file_contents=file_contents)
+    analyzed_sent = text_analysis.main(file_contents)
     pos_sent = analyzed_sent[-1]
     neg_sent = analyzed_sent[0]
-    return render_template('analysis.html', pos_sent=pos_sent, neg_sent=neg_sent)
+    word_cloud = text_analysis.render_word_cloud(file_contents)
+    return render_template('analysis.html', pos_sent=pos_sent, neg_sent=neg_sent, word_cloud=word_cloud)
 
 @app.errorhandler(413)
 def page_not_found(e):
