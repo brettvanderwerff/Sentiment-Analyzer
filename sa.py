@@ -4,6 +4,7 @@ from form import MyForm
 from logging import FileHandler, WARNING
 import text_analysis
 
+
 app = Flask(__name__)
 
 file_handler = FileHandler('errorlog.txt')

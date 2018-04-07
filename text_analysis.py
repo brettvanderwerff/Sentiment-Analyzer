@@ -1,5 +1,7 @@
 import base64
 from io import BytesIO
+import matplotlib
+matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 import nltk
 from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
