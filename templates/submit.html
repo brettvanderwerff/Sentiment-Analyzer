@@ -4,7 +4,7 @@
     <div class="row justify-content-md-center">
         <form method="POST" action="/submit">
             {{ form.hidden_tag() }}
-            {{ form.name.label }}<font color="red"> (limit 1500000 char.)</font><br>
+            {{ form.name.label }}<font color="red"> (limit 1M char.)</font><br>
             {{form.name(rows='15',cols='75')}}
             <input type="submit" value="Submit">
         </form>
