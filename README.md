@@ -4,7 +4,7 @@
 ~~~~~~~
 About:
 ~~~~~~~
-A website that does simple sentiment analysis and word cloud production using vaderSentiment (https://github.com/cjhutto/vaderSentiment/tree/master/vaderSentiment) and word_cloud (https://github.com/amueller/word_cloud). This website was created as way to practice developing a Flask app and then deploying the app to a web server. This project is still in developemt, but is currently deployed at http://www.brettvan.com/.
+A website that does simple sentiment analysis and word cloud production using vaderSentiment (https://github.com/cjhutto/vaderSentiment/tree/master/vaderSentiment) and word_cloud (https://github.com/amueller/word_cloud). This website was created as way to practice developing a Flask app and then deploying the app to a web server. This project is still in developemt.
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Requirements to run locally:
